@@ -14,10 +14,11 @@ En un despliegue real, eso es inaceptable: una empresa no puede permitirse que p
 
 ## Arquitectura
 
-'''Cliente (navegador) ──TLS 1.3──> openssl s_server (contenedor Docker)
+```
+Cliente (navegador) ──TLS 1.3──> openssl s_server (contenedor Docker)
 ├── -cert / -key → ML-DSA-65 (post-cuántico)
-└── -dcert / -dkey → ECDSA P-256 (clásico, fallback)'''
-
+└── -dcert / -dkey → ECDSA P-256 (clásico, fallback)
+```
 
 El servidor elige automáticamente qué certificado enviar según los algoritmos de firma (`sigalgs`) que el cliente anuncia soportar en su `ClientHello`.
 
