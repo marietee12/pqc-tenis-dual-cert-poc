@@ -36,7 +36,6 @@ La flag correcta para combinar un certificado post-cuántico con uno tradicional
 
 ### Probarlo con la imagen publicada
 > docker pull ghcr.io/marietee12/pqc-tenis-dual-cert-poc:latest
->
 > docker run -p 8443:8443 ghcr.io/marietee12/pqc-tenis-dual-cert-poc:latest
 
 ### Construirlo desde el código
