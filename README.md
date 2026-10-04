@@ -22,7 +22,7 @@ Cliente (navegador) ──TLS 1.3──> openssl s_server (contenedor Docker)
 
 El servidor elige automáticamente qué certificado enviar según los algoritmos de firma (`sigalgs`) que el cliente anuncia soportar en su `ClientHello`.
 
-## Lección aprendida: `-cert2`/`-key2` vs `-dcert`/`-dkey`
+##`-cert2`/`-key2` vs `-dcert`/`-dkey`
 
 Durante el desarrollo, la primera implementación usó `-cert2`/`-key2` para el certificado de fallback. **No funcionó**: el servidor seguía enviando siempre el certificado ML-DSA, incluso a clientes que solo anunciaban soporte ECDSA, resultando en `handshake failure`.
 
@@ -78,7 +78,7 @@ Confirma que un cliente restringido a algoritmos clásicos recibe ECDSA en su lu
 No es viable todavía. El estándar que definiría un único certificado con ambas firmas combinadas (`draft-ietf-lamps-pq-composite-sigs`) sigue siendo un borrador del IETF, sin OIDs finales, y el propio equipo de OpenSSL ha descartado darle soporte hasta que el estándar se cierre. El único soporte que existe hoy es experimental (ej. Bouncy Castle), sin garantías de interoperabilidad entre implementaciones. Por eso esta PoC usa **dos certificados separados negociados por el servidor**, que es la alternativa estable disponible actualmente.
 
 ## Estructura del proyecto
-
+```
 .
 ├── Dockerfile # Compila OpenSSL 3.5.7 desde fuente
 ├── docker-compose.yml
@@ -86,7 +86,7 @@ No es viable todavía. El estándar que definiría un único certificado con amb
 ├── gen-cert.sh # Genera certificado ML-DSA-65 + certificado ECDSA P-256
 ├── www/ # Contenido servido por openssl s_server -WWW
 └── README.md
-
+```
 
 ## Notas de seguridad
 
