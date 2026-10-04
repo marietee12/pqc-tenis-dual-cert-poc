@@ -22,7 +22,7 @@ Cliente (navegador) ──TLS 1.3──> openssl s_server (contenedor Docker)
 
 El servidor elige automáticamente qué certificado enviar según los algoritmos de firma (`sigalgs`) que el cliente anuncia soportar en su `ClientHello`.
 
-##`-cert2`/`-key2` vs `-dcert`/`-dkey`
+## `-cert2`/`-key2` vs `-dcert`/`-dkey`
 
 Durante el desarrollo, la primera implementación usó `-cert2`/`-key2` para el certificado de fallback. **No funcionó**: el servidor seguía enviando siempre el certificado ML-DSA, incluso a clientes que solo anunciaban soporte ECDSA, resultando en `handshake failure`.
 
